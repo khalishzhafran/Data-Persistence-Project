@@ -25,6 +25,8 @@ public class MainManager : MonoBehaviour
     {
         if (GameProgress.Instance != null)
         {
+            GameProgress.Instance.LoadGame();
+
             BestScoreText.text = $"Best Score : {GameProgress.Instance.playerName} : {GameProgress.Instance.playerScore}";
         }
 
@@ -61,6 +63,8 @@ public class MainManager : MonoBehaviour
         }
         else if (m_GameOver)
         {
+            GameProgress.Instance.SaveGame();
+
             if (Input.GetKeyDown(KeyCode.Space))
             {
                 SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
@@ -72,6 +76,8 @@ public class MainManager : MonoBehaviour
     {
         m_Points += point;
         ScoreText.text = $"Score : {m_Points}";
+
+        GameProgress.Instance.tempScore = m_Points;
     }
 
     public void GameOver()
